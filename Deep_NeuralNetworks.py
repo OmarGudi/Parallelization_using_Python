@@ -7,11 +7,9 @@ import matplotlib.pyplot as plt
 import os
 
 
-#Crear una comparativa entre dos librerias que hagan paralelización usando el mismo algoritmo.
-#Realizar una prueba usando un algoritmo parecido al que planeo usar.
-#Revisar si puedo usar CUDA.
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+#Crear una comparativa entre dos librerias que hagan paralelización usando el mismo algoritmo. -Done 
+#Realizar una prueba usando un algoritmo parecido al que planeo usar. -Done
+#Revisar si puedo usar CUDA.   -Done
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
@@ -31,7 +29,7 @@ def create_model():
 
 def train_model(start_idx, end_idx, x_train, y_train):
     model = create_model()
-    model.fit(x_train[start_idx:end_idx], y_train[start_idx:end_idx], epochs=5, verbose=0)
+    model.fit(x_train[start_idx:end_idx], y_train[start_idx:end_idx], epochs=50, verbose=0)
     accuracy = model.evaluate(x_test, y_test, verbose=0)
     return accuracy[1]
 
