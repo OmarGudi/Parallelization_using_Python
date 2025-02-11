@@ -19,23 +19,27 @@ def parallel_matrix_multiplication(A, B, num_cores):
 def multiply_chunk(A, B, start_row, end_row):
     return np.dot(A[start_row:end_row, :], B)
 
-A = np.random.rand(10000, 10000)
-B = np.random.rand(10000, 10000)
-execution_times = []
-num_cores = os.cpu_count()
+def main():
+    A = np.random.rand(10000, 10000)
+    B = np.random.rand(10000, 10000)
+    execution_times = []
+    num_cores = os.cpu_count()
 
-for num_processes in range(1, num_cores + 1):
-    start_time = time.time()
-    result = parallel_matrix_multiplication(A, B, num_processes)
-    end_time = time.time()
-    execution_time = end_time - start_time
-    execution_times.append(execution_time)
+    for num_processes in range(1, num_cores + 1):
+        start_time = time.time()
+        result = parallel_matrix_multiplication(A, B, num_processes)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        execution_times.append(execution_time)
 
-    print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
+        print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
 
-plt.plot(range(1, num_cores + 1), execution_times, marker='o')
-plt.xlabel('Número de núcleos')
-plt.ylabel('Tiempo de ejecución (segundos)')
-plt.title('Tiempo de ejecución para multiplicación de matrices con diferentes núcleos')
-plt.grid(True)
-plt.show()
+    plt.plot(range(1, num_cores + 1), execution_times, marker='o')
+    plt.xlabel('Número de núcleos')
+    plt.ylabel('Tiempo de ejecución (segundos)')
+    plt.title('Tiempo de ejecución para multiplicación de matrices con diferentes núcleos')
+    plt.grid(True)
+    plt.show()
+
+if __name__ == '__main__':
+    main()

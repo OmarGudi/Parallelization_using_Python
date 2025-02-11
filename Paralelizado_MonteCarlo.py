@@ -24,19 +24,23 @@ total_samples = 10**8
 execution_times = []
 num_cores = os.cpu_count()
 
-for num_processes in range(1, num_cores + 1):
-    start_time = time.time()
-    pi_approximation = parallel_monte_carlo_pi(total_samples, num_processes)
-    end_time = time.time()
-    execution_time = end_time - start_time
-    execution_times.append(execution_time)
+def main():
+    for num_processes in range(1, num_cores + 1):
+        start_time = time.time()
+        pi_approximation = parallel_monte_carlo_pi(total_samples, num_processes)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        execution_times.append(execution_time)
 
-    print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
-    print(f"Aproximación de Pi con {num_processes} núcleos: {pi_approximation:.6f}")
+        print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
+        print(f"Aproximación de Pi con {num_processes} núcleos: {pi_approximation:.6f}")
 
-plt.plot(range(1, num_cores + 1), execution_times, marker='o')
-plt.xlabel('Número de núcleos')
-plt.ylabel('Tiempo de ejecución (segundos)')
-plt.title('Simulación de Monte Carlo para aproximar Pi')
-plt.grid(True)
-plt.show()
+    plt.plot(range(1, num_cores + 1), execution_times, marker='o')
+    plt.xlabel('Número de núcleos')
+    plt.ylabel('Tiempo de ejecución (segundos)')
+    plt.title('Simulación de Monte Carlo para aproximar Pi')
+    plt.grid(True)
+    plt.show()
+
+if __name__ == '__main__':
+    main()

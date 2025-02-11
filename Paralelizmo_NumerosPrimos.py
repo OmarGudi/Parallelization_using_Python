@@ -26,25 +26,29 @@ def prime_calculation_parallel(limit, num_cores):
     primes = [prime for sublist in result for prime in sublist]
     return primes
 
-limit = 10**7
-execution_times = []
-num_cores = os.cpu_count()
+def main():
+    limit = 10**7
+    execution_times = []
+    num_cores = os.cpu_count()
 
-for num_processes in range(1, num_cores + 1):
-    start_time = time.time()
-    primes = prime_calculation_parallel(limit, num_processes)
-    end_time = time.time()
-    execution_time = end_time - start_time
-    execution_times.append(execution_time)
+    for num_processes in range(1, num_cores + 1):
+        start_time = time.time()
+        primes = prime_calculation_parallel(limit, num_processes)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        execution_times.append(execution_time)
 
-    print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
+        print(f"Tiempo de ejecución con {num_processes} núcleos: {execution_time:.4f} segundos")
 
-for i in range(1, num_cores + 1):
-    print(f"\nResultados con {i} núcleos: {len(primes)} números primos encontrados")
+    for i in range(1, num_cores + 1):
+        print(f"\nResultados con {i} núcleos: {len(primes)} números primos encontrados")
 
-plt.plot(range(1, num_cores + 1), execution_times, marker='o')
-plt.xlabel('Número de núcleos')
-plt.ylabel('Tiempo de ejecución (segundos)')
-plt.title(f'Tiempo de ejecución con diferentes núcleos para cálculo de primos hasta {limit}')
-plt.grid(True)
-plt.show()
+    plt.plot(range(1, num_cores + 1), execution_times, marker='o')
+    plt.xlabel('Número de núcleos')
+    plt.ylabel('Tiempo de ejecución (segundos)')
+    plt.title(f'Tiempo de ejecución con diferentes núcleos para cálculo de primos hasta {limit}')
+    plt.grid(True)
+    plt.show()
+
+if __name__ == '__main__':
+    main()
