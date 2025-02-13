@@ -46,7 +46,7 @@ def main():
     plt.plot(range(1, num_cores + 1), execution_times, marker='o')
     plt.xlabel('Número de núcleos')
     plt.ylabel('Tiempo de ejecución (segundos)')
-    plt.title(f'Tiempo de ejecución con diferentes núcleos para cálculo de primos hasta {limit}')
+    plt.title(f'Tiempo de ejecución para cálculo de primos hasta {limit}')
     plt.grid(True)
     plt.show()
 
